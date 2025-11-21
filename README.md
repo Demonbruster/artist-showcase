@@ -105,7 +105,7 @@ npm install
 Create a `.env` file in the root directory:
 
 ```env
-VITE_LASTFM_API_KEY=d732731be2f5f0ec4b10e5a3607d7090
+VITE_LASTFM_API_KEY=<key>
 VITE_LASTFM_API_URL=https://ws.audioscrobbler.com/2.0/
 ```
 
