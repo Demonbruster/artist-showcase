@@ -62,19 +62,23 @@ const BestPlayedPage = () => {
     })
   }
 
-  // Prepare chart data
-  const chartData = albumDetails?.tracks
-    ?.filter(track => track.playcount && track.playcount > 0)
-    .sort((a, b) => (b.playcount || 0) - (a.playcount || 0))
-    .slice(0, 10) // Top 10 tracks
-    .map(track => ({
-      name: track.name.length > 20 ? track.name.substring(0, 20) + '...' : track.name,
-      fullName: track.name,
-      plays: track.playcount || 0,
-    }))
+  // Prepare chart data with safety checks
+  const chartData = albumDetails?.tracks && Array.isArray(albumDetails.tracks)
+    ? albumDetails.tracks
+        .filter(track => track.playcount && track.playcount > 0)
+        .sort((a, b) => (b.playcount || 0) - (a.playcount || 0))
+        .slice(0, 10) // Top 10 tracks
+        .map(track => ({
+          name: track.name.length > 20 ? track.name.substring(0, 20) + '...' : track.name,
+          fullName: track.name,
+          plays: track.playcount || 0,
+        }))
+    : []
 
   // Check if album has any playcount data
-  const hasPlaycountData = albumDetails?.tracks?.some(track => track.playcount && track.playcount > 0)
+  const hasPlaycountData = albumDetails?.tracks && Array.isArray(albumDetails.tracks) 
+    ? albumDetails.tracks.some(track => track.playcount && track.playcount > 0)
+    : false
 
   // Debug logging
   useEffect(() => {
@@ -215,15 +219,38 @@ const BestPlayedPage = () => {
                     <Text color="gray.600" fontSize="lg">
                       {albumDetails.artist}
                     </Text>
-                    {albumDetails.totalPlaycount !== undefined && (
+                    {albumDetails.totalPlaycount !== undefined && albumDetails.totalPlaycount > 0 && (
                       <Text color="gray.500" fontSize="sm">
                         Total plays: {formatPlayCount(albumDetails.totalPlaycount)}
+                      </Text>
+                    )}
+                    {albumDetails.tracks && (
+                      <Text color="gray.500" fontSize="sm">
+                        {albumDetails.tracks.length} {albumDetails.tracks.length === 1 ? 'track' : 'tracks'}
                       </Text>
                     )}
                   </VStack>
                 </HStack>
 
-                {hasPlaycountData ? (
+                {!albumDetails.tracks || albumDetails.tracks.length === 0 ? (
+                  <Box bg="white" p={8} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
+                    <VStack spacing={4} py={8}>
+                      <Heading size="md" color="gray.700">
+                        No Tracks Available
+                      </Heading>
+                      <Text color="gray.600" textAlign="center" maxW="md">
+                        This album doesn't have track information available on Last.fm.
+                      </Text>
+                      <Button 
+                        mt={4}
+                        colorScheme="brand" 
+                        onClick={() => setSelectedAlbum(null)}
+                      >
+                        Search Another Album
+                      </Button>
+                    </VStack>
+                  </Box>
+                ) : hasPlaycountData ? (
                   chartData && chartData.length > 0 ? (
                     <Box bg="white" p={8} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
                       <Heading size="lg" mb={6} color="gray.900" fontWeight="700">

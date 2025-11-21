@@ -96,15 +96,29 @@ export const getAlbumInfo = async (
     
     const albumData = response.data.album
     
-    // Transform tracks
-    const tracks: Track[] = albumData.tracks.track.map(track => ({
-      name: track.name,
-      artist: typeof track.artist === 'string' ? track.artist : track.artist.name,
-      duration: parseDuration(track.duration),
-      url: track.url,
-      playcount: track.playcount ? parseInt(track.playcount, 10) : undefined,
-      mbid: track.mbid,
-    }))
+    console.log('Raw album data from API:', albumData)
+    console.log('Tracks structure:', albumData.tracks)
+    
+    // Transform tracks - handle different response structures
+    let tracks: Track[] = []
+    
+    if (albumData.tracks && albumData.tracks.track) {
+      // If track is an array
+      const trackArray = Array.isArray(albumData.tracks.track) 
+        ? albumData.tracks.track 
+        : [albumData.tracks.track]
+      
+      tracks = trackArray.map(track => ({
+        name: track.name,
+        artist: typeof track.artist === 'string' ? track.artist : track.artist.name,
+        duration: parseDuration(track.duration),
+        url: track.url,
+        playcount: track.playcount ? parseInt(track.playcount, 10) : undefined,
+        mbid: track.mbid,
+      }))
+    }
+    
+    console.log('Transformed tracks:', tracks)
     
     return {
       name: albumData.name,
