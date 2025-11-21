@@ -50,19 +50,18 @@ const HomePage = () => {
           py={8}
           px={4}
           bg="white"
-          borderRadius="3xl"
-          boxShadow="xl"
+          borderRadius="xl"
+          boxShadow="sm"
         >
           <Heading 
             size="2xl" 
             mb={3}
-            bgGradient="linear(to-r, brand.500, accent.500)"
-            bgClip="text"
-            fontWeight="800"
+            color="gray.900"
+            fontWeight="700"
           >
             Discover Amazing Music
           </Heading>
-          <Text color="gray.600" fontSize="lg" fontWeight="500">
+          <Text color="gray.600" fontSize="lg">
             Search for songs and albums, or explore your favorite artists
           </Text>
         </Box>
@@ -80,26 +79,24 @@ const HomePage = () => {
         )}
 
         {searchQuery.length >= 3 && (
-          <Tabs colorScheme="brand" variant="soft-rounded" bg="white" p={6} borderRadius="2xl" boxShadow="lg">
+          <Tabs colorScheme="brand" variant="enclosed" bg="white" p={6} borderRadius="xl" boxShadow="sm">
             <TabList mb={6}>
               <Tab 
-                fontWeight="600" 
-                borderRadius="xl"
+                fontWeight="600"
                 _selected={{ 
-                  color: 'white', 
-                  bg: 'brand.500',
-                  boxShadow: 'md'
+                  color: 'brand.600',
+                  borderColor: 'brand.600',
+                  borderBottomColor: 'white'
                 }}
               >
                 🎵 Tracks {tracks && `(${tracks.length})`}
               </Tab>
               <Tab 
                 fontWeight="600"
-                borderRadius="xl"
                 _selected={{ 
-                  color: 'white', 
-                  bg: 'brand.500',
-                  boxShadow: 'md'
+                  color: 'brand.600',
+                  borderColor: 'brand.600',
+                  borderBottomColor: 'white'
                 }}
               >
                 💿 Albums {albums && `(${albums.length})`}
@@ -171,16 +168,16 @@ const HomePage = () => {
           <Box 
             bg="white" 
             p={10} 
-            borderRadius="2xl" 
+            borderRadius="xl" 
             textAlign="center"
-            boxShadow="xl"
-            border="2px"
-            borderColor="gray.100"
+            boxShadow="sm"
+            border="1px"
+            borderColor="gray.200"
           >
-            <Heading size="lg" mb={4} color="gray.800">
+            <Heading size="lg" mb={4} color="gray.900">
               🎸 Explore by Artist
             </Heading>
-            <Text color="gray.600" mb={8} fontSize="md">
+            <Text color="gray.600" mb={8}>
               Search for your favorite artist to discover their complete discography
             </Text>
             <SearchBar

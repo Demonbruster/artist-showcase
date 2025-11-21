@@ -20,14 +20,17 @@ const AlbumCard = memo(({ album }: AlbumCardProps) => {
   return (
     <Box
       bg="white"
-      borderRadius="2xl"
+      borderRadius="lg"
       overflow="hidden"
-      boxShadow="md"
-      transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+      boxShadow="sm"
+      border="1px"
+      borderColor="gray.200"
+      transition="all 0.3s ease"
       cursor="pointer"
       _hover={{
-        transform: 'translateY(-8px) scale(1.02)',
-        boxShadow: '2xl',
+        transform: 'translateY(-4px)',
+        boxShadow: 'md',
+        borderColor: 'brand.400',
       }}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
@@ -50,14 +53,14 @@ const AlbumCard = memo(({ album }: AlbumCardProps) => {
           transform={isHovered ? 'scale(1.1)' : 'scale(1)'}
         />
         
-        {/* Gradient overlay on hover */}
+        {/* Overlay on hover */}
         <Box
           position="absolute"
           top={0}
           left={0}
           right={0}
           bottom={0}
-          bgGradient="linear(to-t, blackAlpha.700, transparent)"
+          bg="blackAlpha.600"
           opacity={isHovered ? 1 : 0}
           transition="opacity 0.3s ease"
           display="flex"
@@ -66,9 +69,8 @@ const AlbumCard = memo(({ album }: AlbumCardProps) => {
         >
           <Icon
             as={FiPlay}
-            boxSize={12}
+            boxSize={10}
             color="white"
-            transform={isHovered ? 'scale(1)' : 'scale(0.5)'}
             opacity={isHovered ? 1 : 0}
             transition="all 0.3s ease"
           />
@@ -90,22 +92,19 @@ const AlbumCard = memo(({ album }: AlbumCardProps) => {
           {album.artist}
         </Text>
 
-        <HStack justify="space-between" pt={1}>
+        <HStack justify="space-between">
           {album.year && (
             <Badge 
               colorScheme="brand" 
               variant="subtle" 
               fontSize="xs"
-              borderRadius="full"
-              px={3}
-              py={1}
             >
               {album.year}
             </Badge>
           )}
           
           {album.playcount !== undefined && (
-            <Text fontSize="xs" color="gray.500" fontWeight="600">
+            <Text fontSize="xs" color="gray.500">
               {formatPlayCount(album.playcount)} plays
             </Text>
           )}

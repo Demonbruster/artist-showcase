@@ -78,13 +78,12 @@ const Layout = ({ children }: LayoutProps) => {
               as={RouterLink}
               to="/"
               size="lg"
-              bgGradient="linear(to-r, brand.500, accent.500)"
-              bgClip="text"
-              fontWeight="800"
+              color="brand.600"
+              fontWeight="700"
               letterSpacing="tight"
               transition="all 0.3s ease"
               _hover={{ 
-                transform: 'scale(1.05)',
+                color: 'brand.700',
               }}
             >
               🎵 Artist Showcase

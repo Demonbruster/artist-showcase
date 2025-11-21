@@ -18,24 +18,15 @@ const SearchBar = ({ value, onChange, placeholder = 'Search...' }: SearchBarProp
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         bg="white"
-        borderRadius="2xl"
-        border="2px"
-        borderColor="gray.200"
-        fontSize="md"
-        fontWeight="500"
-        _placeholder={{
-          color: 'gray.400',
-          fontWeight: '400',
-        }}
+        borderRadius="lg"
         _hover={{
-          borderColor: 'brand.300',
+          borderColor: 'gray.300',
         }}
         _focus={{
           borderColor: 'brand.400',
-          boxShadow: '0 0 0 4px rgba(14, 165, 233, 0.1)',
+          boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
           bg: 'white',
         }}
-        transition="all 0.3s ease"
       />
       {value && (
         <InputRightElement>

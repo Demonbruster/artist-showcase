@@ -91,20 +91,21 @@ const BestPlayedPage = () => {
         <Box 
           bg="white" 
           p={8} 
-          borderRadius="2xl" 
-          boxShadow="xl"
+          borderRadius="xl" 
+          boxShadow="sm"
           textAlign="center"
+          borderBottom="3px"
+          borderColor="brand.500"
         >
           <Heading 
             size="2xl" 
             mb={3}
-            bgGradient="linear(to-r, brand.500, accent.500)"
-            bgClip="text"
-            fontWeight="800"
+            color="gray.900"
+            fontWeight="700"
           >
             📊 Most Played Tracks
           </Heading>
-          <Text color="gray.600" fontSize="lg" fontWeight="500">
+          <Text color="gray.600" fontSize="lg">
             Search for an album to visualize its most played tracks
           </Text>
         </Box>
@@ -120,8 +121,8 @@ const BestPlayedPage = () => {
         )}
 
         {searchResults && searchResults.length > 0 && searchQuery.length >= 3 && (
-          <Box bg="white" p={6} borderRadius="2xl" maxH="500px" overflowY="auto" boxShadow="lg" border="1px" borderColor="gray.100">
-            <Heading size="md" mb={4} color="gray.800" fontWeight="700">
+          <Box bg="white" p={6} borderRadius="xl" maxH="500px" overflowY="auto" boxShadow="sm" border="1px" borderColor="gray.200">
+            <Heading size="md" mb={4} color="gray.900" fontWeight="700">
               🔍 Search Results
             </Heading>
             <VStack spacing={2} align="stretch">
@@ -179,12 +180,12 @@ const BestPlayedPage = () => {
                 <HStack
                   bg="white"
                   p={8}
-                  borderRadius="2xl"
+                  borderRadius="xl"
                   spacing={6}
                   flexWrap="wrap"
-                  boxShadow="xl"
+                  boxShadow="sm"
                   border="1px"
-                  borderColor="gray.100"
+                  borderColor="gray.200"
                 >
                   <Image
                     src={albumDetails.coverImage}
@@ -208,8 +209,8 @@ const BestPlayedPage = () => {
                 </HStack>
 
                 {chartData && chartData.length > 0 ? (
-                  <Box bg="white" p={8} borderRadius="2xl" boxShadow="xl" border="1px" borderColor="gray.100">
-                    <Heading size="lg" mb={6} color="gray.800" fontWeight="700">
+                  <Box bg="white" p={8} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
+                    <Heading size="lg" mb={6} color="gray.900" fontWeight="700">
                       🎵 Top 10 Most Played Tracks
                     </Heading>
                     <ResponsiveContainer width="100%" height={400}>

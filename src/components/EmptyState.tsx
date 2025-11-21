@@ -1,4 +1,4 @@
-import { VStack, Heading, Text, Button, Box } from '@chakra-ui/react'
+import { VStack, Heading, Text, Button } from '@chakra-ui/react'
 import { InfoIcon } from '@chakra-ui/icons'
 
 interface EmptyStateProps {
@@ -11,28 +11,18 @@ interface EmptyStateProps {
 const EmptyState = ({ title, description, actionLabel, onAction }: EmptyStateProps) => {
   return (
     <VStack 
-      spacing={6} 
-      py={16} 
+      spacing={4} 
+      py={12} 
       px={4} 
       textAlign="center"
-      bg="white"
-      borderRadius="2xl"
-      boxShadow="md"
     >
-      <Box
-        p={6}
-        bg="brand.50"
-        borderRadius="full"
-        display="inline-flex"
-      >
-        <InfoIcon boxSize={12} color="brand.500" />
-      </Box>
+      <InfoIcon boxSize={12} color="gray.400" />
       
-      <Heading size="lg" color="gray.800" fontWeight="700">
+      <Heading size="md" color="gray.700">
         {title}
       </Heading>
       
-      <Text color="gray.600" maxW="md" fontSize="md" lineHeight="tall">
+      <Text color="gray.600" maxW="md">
         {description}
       </Text>
       
@@ -40,14 +30,7 @@ const EmptyState = ({ title, description, actionLabel, onAction }: EmptyStatePro
         <Button 
           colorScheme="brand" 
           onClick={onAction} 
-          mt={4}
-          size="lg"
-          borderRadius="xl"
-          boxShadow="md"
-          _hover={{
-            transform: 'translateY(-2px)',
-            boxShadow: 'lg',
-          }}
+          mt={2}
         >
           {actionLabel}
         </Button>

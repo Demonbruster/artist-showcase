@@ -47,9 +47,8 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        bgGradient: 'linear(to-br, gray.50, blue.50)',
-        color: 'gray.800',
+        bg: 'gray.50',
+        color: 'gray.900',
       },
       '*::placeholder': {
         color: 'gray.400',

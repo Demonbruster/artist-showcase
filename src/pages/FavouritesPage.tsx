@@ -36,21 +36,22 @@ const FavouritesPage = () => {
         <Box
           bg="white"
           p={8}
-          borderRadius="2xl"
-          boxShadow="xl"
+          borderRadius="xl"
+          boxShadow="sm"
           mb={6}
+          borderBottom="3px"
+          borderColor="brand.500"
         >
           <HStack justify="space-between" flexWrap="wrap" gap={4}>
             <Box>
               <Heading 
                 size="2xl"
-                bgGradient="linear(to-r, brand.500, accent.500)"
-                bgClip="text"
-                fontWeight="800"
+                color="gray.900"
+                fontWeight="700"
               >
                 ⭐ Your Favourites
               </Heading>
-              <Text color="gray.600" mt={2} fontSize="lg" fontWeight="600">
+              <Text color="gray.600" mt={2} fontSize="lg">
                 {favourites.length} {favourites.length === 1 ? 'track' : 'tracks'} saved
               </Text>
             </Box>
@@ -62,12 +63,7 @@ const FavouritesPage = () => {
                 variant="outline"
                 leftIcon={<DeleteIcon />}
                 onClick={clearFavourites}
-                borderRadius="xl"
                 fontWeight="600"
-                _hover={{
-                  transform: 'translateY(-2px)',
-                  boxShadow: 'md',
-                }}
               >
                 Clear All
               </Button>
@@ -96,7 +92,7 @@ const FavouritesPage = () => {
             description="Try a different search term"
           />
         ) : (
-          <VStack spacing={0} align="stretch" bg="white" borderRadius="2xl" overflow="hidden" boxShadow="lg" border="1px" borderColor="gray.100">
+          <VStack spacing={0} align="stretch" bg="white" borderRadius="xl" overflow="hidden" boxShadow="sm" border="1px" borderColor="gray.200">
             {filteredFavourites.map((track, index) => (
               <Box
                 key={`${track.name}-${track.artist}-${index}`}

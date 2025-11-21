@@ -54,45 +54,44 @@ const AlbumDetailPage = () => {
         <VStack spacing={8} align="stretch">
           <Flex
             direction={{ base: 'column', md: 'row' }}
-            gap={10}
+            gap={8}
             bg="white"
             p={8}
-            borderRadius="3xl"
-            boxShadow="2xl"
+            borderRadius="xl"
+            boxShadow="sm"
             border="1px"
-            borderColor="gray.100"
+            borderColor="gray.200"
           >
             <Box flexShrink={0}>
               <Image
                 src={album.coverImage}
                 alt={album.name}
-                boxSize={{ base: '100%', md: '320px' }}
+                boxSize={{ base: '100%', md: '300px' }}
                 objectFit="cover"
-                borderRadius="2xl"
-                boxShadow="xl"
+                borderRadius="lg"
+                boxShadow="md"
                 fallbackSrc="https://via.placeholder.com/300x300?text=No+Image"
               />
             </Box>
 
-            <VStack align="stretch" flex={1} justify="center" spacing={6}>
+            <VStack align="stretch" flex={1} justify="center" spacing={4}>
               <Box>
                 <Badge 
                   colorScheme="brand" 
-                  fontSize="md" 
+                  fontSize="sm" 
                   mb={3}
-                  px={4}
-                  py={2}
-                  borderRadius="full"
-                  fontWeight="700"
+                  px={3}
+                  py={1}
+                  borderRadius="md"
+                  fontWeight="600"
                 >
                   💿 Album
                 </Badge>
                 <Heading 
                   size="2xl" 
                   mb={3}
-                  bgGradient="linear(to-r, brand.500, accent.500)"
-                  bgClip="text"
-                  fontWeight="800"
+                  color="gray.900"
+                  fontWeight="700"
                 >
                   {album.name}
                 </Heading>
@@ -103,46 +102,52 @@ const AlbumDetailPage = () => {
 
               <Divider />
 
-              <HStack spacing={8} flexWrap="wrap">
+              <HStack spacing={6} flexWrap="wrap">
                 {album.year && (
                   <Box 
-                    bg="brand.50" 
-                    px={6} 
+                    bg="gray.50" 
+                    px={5} 
                     py={3} 
-                    borderRadius="xl"
+                    borderRadius="md"
+                    border="1px"
+                    borderColor="gray.200"
                   >
                     <Text fontSize="xs" color="gray.600" mb={1} fontWeight="600">
                       Year
                     </Text>
-                    <Text fontWeight="700" fontSize="lg" color="brand.700">{album.year}</Text>
+                    <Text fontWeight="700" fontSize="lg" color="gray.900">{album.year}</Text>
                   </Box>
                 )}
 
                 {album.tracks && (
                   <Box 
-                    bg="accent.50" 
-                    px={6} 
+                    bg="gray.50" 
+                    px={5} 
                     py={3} 
-                    borderRadius="xl"
+                    borderRadius="md"
+                    border="1px"
+                    borderColor="gray.200"
                   >
                     <Text fontSize="xs" color="gray.600" mb={1} fontWeight="600">
                       Tracks
                     </Text>
-                    <Text fontWeight="700" fontSize="lg" color="accent.700">{album.tracks.length}</Text>
+                    <Text fontWeight="700" fontSize="lg" color="gray.900">{album.tracks.length}</Text>
                   </Box>
                 )}
 
                 {album.listeners !== undefined && (
                   <Box 
-                    bg="green.50" 
-                    px={6} 
+                    bg="gray.50" 
+                    px={5} 
                     py={3} 
-                    borderRadius="xl"
+                    borderRadius="md"
+                    border="1px"
+                    borderColor="gray.200"
                   >
                     <Text fontSize="xs" color="gray.600" mb={1} fontWeight="600">
                       Listeners
                     </Text>
-                    <Text fontWeight="700" fontSize="lg" color="green.700">
+                    <Text fontWeight="700" fontSize="lg" color="gray.900">
                       {formatPlayCount(album.listeners)}
                     </Text>
                   </Box>
@@ -150,15 +155,17 @@ const AlbumDetailPage = () => {
 
                 {album.totalPlaycount !== undefined && (
                   <Box 
-                    bg="orange.50" 
-                    px={6} 
+                    bg="gray.50" 
+                    px={5} 
                     py={3} 
-                    borderRadius="xl"
+                    borderRadius="md"
+                    border="1px"
+                    borderColor="gray.200"
                   >
                     <Text fontSize="xs" color="gray.600" mb={1} fontWeight="600">
                       Total Plays
                     </Text>
-                    <Text fontWeight="700" fontSize="lg" color="orange.700">
+                    <Text fontWeight="700" fontSize="lg" color="gray.900">
                       {formatPlayCount(album.totalPlaycount)}
                     </Text>
                   </Box>
@@ -170,12 +177,12 @@ const AlbumDetailPage = () => {
           <Box 
             bg="white" 
             p={6} 
-            borderRadius="2xl" 
-            boxShadow="xl"
+            borderRadius="xl" 
+            boxShadow="sm"
             border="1px"
-            borderColor="gray.100"
+            borderColor="gray.200"
           >
-            <Heading size="lg" mb={6} color="gray.800" fontWeight="700">
+            <Heading size="lg" mb={4} color="gray.900" fontWeight="700">
               🎵 Tracklist
             </Heading>
             {album.tracks && album.tracks.length > 0 ? (

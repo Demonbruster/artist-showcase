@@ -40,22 +40,23 @@ const ArtistPage = () => {
         <Box
           bg="white"
           p={8}
-          borderRadius="2xl"
-          boxShadow="xl"
+          borderRadius="xl"
+          boxShadow="sm"
           mb={6}
+          borderBottom="3px"
+          borderColor="brand.500"
         >
           <HStack justify="space-between" flexWrap="wrap" gap={4}>
             <Box>
               <Heading 
                 size="2xl"
-                bgGradient="linear(to-r, brand.500, accent.500)"
-                bgClip="text"
-                fontWeight="800"
+                color="gray.900"
+                fontWeight="700"
               >
                 {decodeURIComponent(artistName)}
               </Heading>
               {albums && (
-                <Text fontSize="lg" color="gray.600" fontWeight="600" mt={2}>
+                <Text fontSize="lg" color="gray.600" mt={2}>
                   {albums.length} {albums.length === 1 ? 'album' : 'albums'} available
                 </Text>
               )}
