@@ -1,12 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react'
 
 const FavouritesPage = () => {
-  return (
-    <Box>
-      <h1>Favourites Page - To be implemented</h1>
-    </Box>
-  );
-};
+  return <Box>Favourites Page - Coming Soon</Box>
+}
 
-export default FavouritesPage;
-
+export default FavouritesPage

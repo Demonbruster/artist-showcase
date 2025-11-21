@@ -1,12 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react'
 
 const ArtistPage = () => {
-  return (
-    <Box>
-      <h1>Artist Page - To be implemented</h1>
-    </Box>
-  );
-};
+  return <Box>Artist Page - Coming Soon</Box>
+}
 
-export default ArtistPage;
-
+export default ArtistPage

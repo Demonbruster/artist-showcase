@@ -1,12 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react'
 
 const BestPlayedPage = () => {
-  return (
-    <Box>
-      <h1>Best Played Page - To be implemented</h1>
-    </Box>
-  );
-};
+  return <Box>Best Played Page - Coming Soon</Box>
+}
 
-export default BestPlayedPage;
-
+export default BestPlayedPage

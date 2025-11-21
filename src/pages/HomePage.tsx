@@ -1,12 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react'
 
 const HomePage = () => {
-  return (
-    <Box>
-      <h1>Home Page - To be implemented</h1>
-    </Box>
-  );
-};
+  return <Box>Home Page - Coming Soon</Box>
+}
 
-export default HomePage;
-
+export default HomePage
