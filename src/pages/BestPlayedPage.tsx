@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   VStack,
   Heading,
@@ -52,6 +52,7 @@ const BestPlayedPage = () => {
   const handleAlbumSelect = (artist: string, albumName: string) => {
     setSelectedAlbum({ artist, name: albumName })
     setSearchQuery('')
+    console.log('Selected album:', { artist, albumName })
     toast({
       title: 'Album selected',
       description: `Loading data for "${albumName}"`,
@@ -71,6 +72,20 @@ const BestPlayedPage = () => {
       fullName: track.name,
       plays: track.playcount || 0,
     }))
+
+  // Check if album has any playcount data
+  const hasPlaycountData = albumDetails?.tracks?.some(track => track.playcount && track.playcount > 0)
+
+  // Debug logging
+  useEffect(() => {
+    if (albumDetails) {
+      console.log('Album details loaded:', albumDetails)
+      console.log('Total tracks:', albumDetails.tracks?.length)
+      console.log('Tracks with playcount:', albumDetails.tracks?.filter(t => t.playcount && t.playcount > 0).length)
+      console.log('Has playcount data:', hasPlaycountData)
+      console.log('Chart data:', chartData)
+    }
+  }, [albumDetails, hasPlaycountData, chartData])
 
   const colors = [
     '#2196f3',
@@ -208,45 +223,71 @@ const BestPlayedPage = () => {
                   </VStack>
                 </HStack>
 
-                {chartData && chartData.length > 0 ? (
-                  <Box bg="white" p={8} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
-                    <Heading size="lg" mb={6} color="gray.900" fontWeight="700">
-                      🎵 Top 10 Most Played Tracks
-                    </Heading>
-                    <ResponsiveContainer width="100%" height={400}>
-                      <BarChart data={chartData} layout="vertical">
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis type="number" />
-                        <YAxis dataKey="name" type="category" width={150} />
-                        <Tooltip
-                          content={({ payload }) => {
-                            if (payload && payload.length > 0 && payload[0]) {
-                              const data = payload[0].payload
-                              return (
-                                <Box bg="white" p={3} borderRadius="md" boxShadow="md">
-                                  <Text fontWeight="semibold">{data.fullName}</Text>
-                                  <Text color="gray.600">
-                                    {formatPlayCount(data.plays)} plays
-                                  </Text>
-                                </Box>
-                              )
-                            }
-                            return null
-                          }}
-                        />
-                        <Bar dataKey="plays" radius={[0, 8, 8, 0]}>
-                          {chartData.map((_entry, index) => (
-                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-                          ))}
-                        </Bar>
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </Box>
+                {hasPlaycountData ? (
+                  chartData && chartData.length > 0 ? (
+                    <Box bg="white" p={8} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
+                      <Heading size="lg" mb={6} color="gray.900" fontWeight="700">
+                        🎵 Top 10 Most Played Tracks
+                      </Heading>
+                      <ResponsiveContainer width="100%" height={400}>
+                        <BarChart data={chartData} layout="vertical">
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis type="number" />
+                          <YAxis dataKey="name" type="category" width={150} />
+                          <Tooltip
+                            content={({ payload }) => {
+                              if (payload && payload.length > 0 && payload[0]) {
+                                const data = payload[0].payload
+                                return (
+                                  <Box bg="white" p={3} borderRadius="md" boxShadow="md" border="1px" borderColor="gray.200">
+                                    <Text fontWeight="semibold">{data.fullName}</Text>
+                                    <Text color="gray.600">
+                                      {formatPlayCount(data.plays)} plays
+                                    </Text>
+                                  </Box>
+                                )
+                              }
+                              return null
+                            }}
+                          />
+                          <Bar dataKey="plays" radius={[0, 8, 8, 0]}>
+                            {chartData.map((_entry, index) => (
+                              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                            ))}
+                          </Bar>
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </Box>
+                  ) : (
+                    <Box bg="white" p={8} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
+                      <EmptyState
+                        title="Not enough data"
+                        description="This album has play count data, but couldn't find tracks with sufficient plays to display"
+                      />
+                    </Box>
+                  )
                 ) : (
-                  <EmptyState
-                    title="No play count data"
-                    description="This album doesn't have play count information available"
-                  />
+                  <Box bg="white" p={8} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
+                    <VStack spacing={4} py={8}>
+                      <Heading size="md" color="gray.700">
+                        No Play Count Data Available
+                      </Heading>
+                      <Text color="gray.600" textAlign="center" maxW="md">
+                        Last.fm doesn't have play count statistics for this album's tracks. 
+                        Try searching for a more popular album or a different artist.
+                      </Text>
+                      <Text fontSize="sm" color="gray.500">
+                        💡 Tip: Popular albums from well-known artists usually have play count data
+                      </Text>
+                      <Button 
+                        mt={4}
+                        colorScheme="brand" 
+                        onClick={() => setSelectedAlbum(null)}
+                      >
+                        Search Another Album
+                      </Button>
+                    </VStack>
+                  </Box>
                 )}
               </VStack>
             )}
@@ -254,10 +295,26 @@ const BestPlayedPage = () => {
         )}
 
         {!selectedAlbum && searchQuery.length === 0 && (
-          <EmptyState
-            title="Search for an Album"
-            description="Enter an album name in the search bar above to view its most played tracks"
-          />
+          <Box bg="white" p={10} borderRadius="xl" boxShadow="sm" border="1px" borderColor="gray.200">
+            <VStack spacing={4}>
+              <Heading size="md" color="gray.700">
+                Search for an Album
+              </Heading>
+              <Text color="gray.600" textAlign="center">
+                Enter an album name in the search bar above to view its most played tracks
+              </Text>
+              <Box mt={4} p={4} bg="blue.50" borderRadius="md" borderLeft="4px" borderColor="brand.500">
+                <Text fontSize="sm" fontWeight="600" color="brand.700" mb={2}>
+                  💡 Try these popular albums:
+                </Text>
+                <VStack align="start" spacing={1}>
+                  <Text fontSize="sm" color="gray.700">• "Abbey Road" by The Beatles</Text>
+                  <Text fontSize="sm" color="gray.700">• "Thriller" by Michael Jackson</Text>
+                  <Text fontSize="sm" color="gray.700">• "The Dark Side of the Moon" by Pink Floyd</Text>
+                </VStack>
+              </Box>
+            </VStack>
+          </Box>
         )}
       </VStack>
     </Layout>
