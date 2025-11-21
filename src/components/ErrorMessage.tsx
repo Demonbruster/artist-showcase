@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, AlertTitle, AlertDescription, Box } from '@chakra-ui/react'
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react'
 
 interface ErrorMessageProps {
   title?: string

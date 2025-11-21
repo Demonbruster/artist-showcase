@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Box, Spinner, Center } from '@chakra-ui/react'
+import { Spinner, Center } from '@chakra-ui/react'
 
 // Lazy load pages for code splitting
 const HomePage = lazy(() => import('./pages/HomePage'))

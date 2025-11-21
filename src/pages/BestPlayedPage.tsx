@@ -63,7 +63,7 @@ const BestPlayedPage = () => {
 
   // Prepare chart data
   const chartData = albumDetails?.tracks
-    .filter(track => track.playcount && track.playcount > 0)
+    ?.filter(track => track.playcount && track.playcount > 0)
     .sort((a, b) => (b.playcount || 0) - (a.playcount || 0))
     .slice(0, 10) // Top 10 tracks
     .map(track => ({
@@ -204,7 +204,7 @@ const BestPlayedPage = () => {
                         <YAxis dataKey="name" type="category" width={150} />
                         <Tooltip
                           content={({ payload }) => {
-                            if (payload && payload.length > 0) {
+                            if (payload && payload.length > 0 && payload[0]) {
                               const data = payload[0].payload
                               return (
                                 <Box bg="white" p={3} borderRadius="md" boxShadow="md">
