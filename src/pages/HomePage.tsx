@@ -9,6 +9,9 @@ import {
   Heading,
   Text,
   Box,
+  HStack,
+  Button,
+  Badge,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
@@ -36,9 +39,9 @@ const HomePage = () => {
     error: albumsError,
   } = useAlbumSearch(searchQuery)
 
-  const handleArtistSearch = (artistName: string) => {
-    if (artistName.trim()) {
-      navigate(`/artist/${encodeURIComponent(artistName.trim())}`)
+  const handleSearchAsArtist = () => {
+    if (searchQuery.trim()) {
+      navigate(`/artist/${encodeURIComponent(searchQuery.trim())}`)
     }
   }
 
@@ -62,21 +65,39 @@ const HomePage = () => {
             Discover Amazing Music
           </Heading>
           <Text color="gray.600" fontSize="lg">
-            Search for songs and albums, or explore your favorite artists
+            Search for songs, albums, or explore artists
           </Text>
         </Box>
 
-        <SearchBar
-          value={searchQuery}
-          onChange={setSearchQuery}
-          placeholder="Search for tracks or albums..."
-        />
+        <Box>
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Search for tracks, albums, or artists..."
+          />
+          
+          {searchQuery.length > 0 && searchQuery.length < 3 && (
+            <Text color="gray.500" textAlign="center" fontSize="sm" mt={3}>
+              Type at least 3 characters to search
+            </Text>
+          )}
 
-        {searchQuery.length > 0 && searchQuery.length < 3 && (
-          <Text color="gray.500" textAlign="center" fontSize="sm">
-            Type at least 3 characters to search
-          </Text>
-        )}
+          {searchQuery.length >= 3 && (
+            <HStack mt={4} spacing={3} justify="center">
+              <Text fontSize="sm" color="gray.600">
+                Not finding what you need?
+              </Text>
+              <Button
+                size="sm"
+                variant="outline"
+                colorScheme="brand"
+                onClick={handleSearchAsArtist}
+              >
+                Search as Artist Name →
+              </Button>
+            </HStack>
+          )}
+        </Box>
 
         {searchQuery.length >= 3 && (
           <Tabs colorScheme="brand" variant="enclosed" bg="white" p={6} borderRadius="xl" boxShadow="sm">
@@ -175,16 +196,22 @@ const HomePage = () => {
             borderColor="gray.200"
           >
             <Heading size="lg" mb={4} color="gray.900">
-              🎸 Explore by Artist
+              🎵 Start Exploring
             </Heading>
-            <Text color="gray.600" mb={8}>
-              Search for your favorite artist to discover their complete discography
+            <Text color="gray.600" fontSize="md">
+              Use the search bar above to find tracks, albums, or artists
             </Text>
-            <SearchBar
-              value=""
-              onChange={handleArtistSearch}
-              placeholder="Enter artist name and press Enter..."
-            />
+            <HStack justify="center" mt={6} spacing={4} flexWrap="wrap">
+              <Badge colorScheme="blue" fontSize="sm" px={3} py={1}>
+                Tracks
+              </Badge>
+              <Badge colorScheme="purple" fontSize="sm" px={3} py={1}>
+                Albums
+              </Badge>
+              <Badge colorScheme="green" fontSize="sm" px={3} py={1}>
+                Artists
+              </Badge>
+            </HStack>
           </Box>
         )}
       </VStack>
