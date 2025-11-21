@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { VStack, Heading, HStack, Box } from '@chakra-ui/react'
+import { VStack, Heading, HStack, Box, Text } from '@chakra-ui/react'
 import Layout from '../components/Layout'
 import AlbumGrid from '../components/AlbumGrid'
 import SortControls from '../components/SortControls'
@@ -37,20 +37,35 @@ const ArtistPage = () => {
   return (
     <Layout>
       <VStack spacing={6} align="stretch">
-        <HStack justify="space-between" flexWrap="wrap" gap={4}>
-          <Box>
-            <Heading size="xl">{decodeURIComponent(artistName)}</Heading>
-            {albums && (
-              <Heading size="sm" color="gray.600" fontWeight="normal" mt={1}>
-                {albums.length} {albums.length === 1 ? 'album' : 'albums'}
+        <Box
+          bg="white"
+          p={8}
+          borderRadius="2xl"
+          boxShadow="xl"
+          mb={6}
+        >
+          <HStack justify="space-between" flexWrap="wrap" gap={4}>
+            <Box>
+              <Heading 
+                size="2xl"
+                bgGradient="linear(to-r, brand.500, accent.500)"
+                bgClip="text"
+                fontWeight="800"
+              >
+                {decodeURIComponent(artistName)}
               </Heading>
-            )}
-          </Box>
+              {albums && (
+                <Text fontSize="lg" color="gray.600" fontWeight="600" mt={2}>
+                  {albums.length} {albums.length === 1 ? 'album' : 'albums'} available
+                </Text>
+              )}
+            </Box>
 
-          {albums && albums.length > 0 && (
-            <SortControls sortOrder={sortOrder} onSortChange={setSortOrder} />
-          )}
-        </HStack>
+            {albums && albums.length > 0 && (
+              <SortControls sortOrder={sortOrder} onSortChange={setSortOrder} />
+            )}
+          </HStack>
+        </Box>
 
         {isLoading && <LoadingSpinner message="Loading albums..." />}
 

@@ -18,31 +18,47 @@ const SortControls = ({ sortOrder, onSortChange }: SortControlsProps) => {
   const isActive = (order: SortOrder) => sortOrder === order
 
   return (
-    <HStack spacing={2} flexWrap="wrap">
-      <Text fontSize="sm" color="gray.600" fontWeight="medium">
+    <HStack spacing={3} flexWrap="wrap" bg="gray.50" p={3} borderRadius="xl">
+      <Text fontSize="sm" color="gray.700" fontWeight="700">
         Sort by:
       </Text>
 
       <Button
-        size="sm"
+        size="md"
         variant={isActive('name-asc') || isActive('name-desc') ? 'solid' : 'outline'}
         colorScheme="brand"
         rightIcon={getSortIcon('name-asc') || getSortIcon('name-desc') || undefined}
         onClick={() =>
           onSortChange(sortOrder === 'name-asc' ? 'name-desc' : 'name-asc')
         }
+        borderRadius="xl"
+        fontWeight="600"
+        boxShadow={isActive('name-asc') || isActive('name-desc') ? 'md' : 'none'}
+        _hover={{
+          transform: 'translateY(-2px)',
+          boxShadow: 'md',
+        }}
+        transition="all 0.3s ease"
       >
         Name
       </Button>
 
       <Button
-        size="sm"
+        size="md"
         variant={isActive('year-asc') || isActive('year-desc') ? 'solid' : 'outline'}
         colorScheme="brand"
         rightIcon={getSortIcon('year-asc') || getSortIcon('year-desc') || undefined}
         onClick={() =>
           onSortChange(sortOrder === 'year-asc' ? 'year-desc' : 'year-asc')
         }
+        borderRadius="xl"
+        fontWeight="600"
+        boxShadow={isActive('year-asc') || isActive('year-desc') ? 'md' : 'none'}
+        _hover={{
+          transform: 'translateY(-2px)',
+          boxShadow: 'md',
+        }}
+        transition="all 0.3s ease"
       >
         Year
       </Button>

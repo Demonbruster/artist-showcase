@@ -33,26 +33,47 @@ const FavouritesPage = () => {
   return (
     <Layout>
       <VStack spacing={6} align="stretch">
-        <HStack justify="space-between" flexWrap="wrap" gap={4}>
-          <Box>
-            <Heading size="xl">Your Favourites</Heading>
-            <Text color="gray.600" mt={1}>
-              {favourites.length} {favourites.length === 1 ? 'track' : 'tracks'} saved
-            </Text>
-          </Box>
+        <Box
+          bg="white"
+          p={8}
+          borderRadius="2xl"
+          boxShadow="xl"
+          mb={6}
+        >
+          <HStack justify="space-between" flexWrap="wrap" gap={4}>
+            <Box>
+              <Heading 
+                size="2xl"
+                bgGradient="linear(to-r, brand.500, accent.500)"
+                bgClip="text"
+                fontWeight="800"
+              >
+                ⭐ Your Favourites
+              </Heading>
+              <Text color="gray.600" mt={2} fontSize="lg" fontWeight="600">
+                {favourites.length} {favourites.length === 1 ? 'track' : 'tracks'} saved
+              </Text>
+            </Box>
 
-          {favourites.length > 0 && (
-            <Button
-              size="sm"
-              colorScheme="red"
-              variant="outline"
-              leftIcon={<DeleteIcon />}
-              onClick={clearFavourites}
-            >
-              Clear All
-            </Button>
-          )}
-        </HStack>
+            {favourites.length > 0 && (
+              <Button
+                size="md"
+                colorScheme="red"
+                variant="outline"
+                leftIcon={<DeleteIcon />}
+                onClick={clearFavourites}
+                borderRadius="xl"
+                fontWeight="600"
+                _hover={{
+                  transform: 'translateY(-2px)',
+                  boxShadow: 'md',
+                }}
+              >
+                Clear All
+              </Button>
+            )}
+          </HStack>
+        </Box>
 
         {favourites.length > 0 && (
           <SearchBar
@@ -75,7 +96,7 @@ const FavouritesPage = () => {
             description="Try a different search term"
           />
         ) : (
-          <VStack spacing={0} align="stretch" bg="white" borderRadius="lg" overflow="hidden">
+          <VStack spacing={0} align="stretch" bg="white" borderRadius="2xl" overflow="hidden" boxShadow="lg" border="1px" borderColor="gray.100">
             {filteredFavourites.map((track, index) => (
               <Box
                 key={`${track.name}-${track.artist}-${index}`}

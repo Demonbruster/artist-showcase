@@ -36,14 +36,32 @@ const TrackListItem = memo(
     return (
       <Flex
         align="center"
-        px={4}
-        py={3}
-        _hover={{ bg: 'gray.50' }}
-        transition="background 0.2s"
+        px={5}
+        py={4}
+        _hover={{ 
+          bg: 'brand.50',
+          transform: 'translateX(4px)',
+          '&::before': {
+            transform: 'scaleY(1)',
+          },
+        }}
+        transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
         cursor={onTrackClick ? 'pointer' : 'default'}
         onClick={onTrackClick}
         borderBottom="1px"
         borderColor="gray.100"
+        position="relative"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '3px',
+          bg: 'brand.500',
+          transform: 'scaleY(0)',
+          transition: 'transform 0.3s ease',
+        }}
       >
         <Text
           w="40px"
@@ -79,9 +97,13 @@ const TrackListItem = memo(
             colorScheme={isTrackFavourite ? 'yellow' : 'gray'}
             color={isTrackFavourite ? 'yellow.400' : 'gray.400'}
             onClick={handleToggleFavourite}
+            borderRadius="full"
             _hover={{
               color: isTrackFavourite ? 'yellow.500' : 'yellow.400',
+              transform: 'scale(1.2) rotate(72deg)',
+              bg: isTrackFavourite ? 'yellow.50' : 'yellow.50',
             }}
+            transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
           />
         </HStack>
       </Flex>

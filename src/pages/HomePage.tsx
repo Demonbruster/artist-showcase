@@ -45,12 +45,25 @@ const HomePage = () => {
   return (
     <Layout>
       <VStack spacing={8} align="stretch">
-        <Box textAlign="center">
-          <Heading size="xl" mb={2}>
-            Discover Music
+        <Box 
+          textAlign="center" 
+          py={8}
+          px={4}
+          bg="white"
+          borderRadius="3xl"
+          boxShadow="xl"
+        >
+          <Heading 
+            size="2xl" 
+            mb={3}
+            bgGradient="linear(to-r, brand.500, accent.500)"
+            bgClip="text"
+            fontWeight="800"
+          >
+            Discover Amazing Music
           </Heading>
-          <Text color="gray.600">
-            Search for songs and albums, or explore artists
+          <Text color="gray.600" fontSize="lg" fontWeight="500">
+            Search for songs and albums, or explore your favorite artists
           </Text>
         </Box>
 
@@ -67,13 +80,29 @@ const HomePage = () => {
         )}
 
         {searchQuery.length >= 3 && (
-          <Tabs colorScheme="brand" variant="enclosed">
-            <TabList>
-              <Tab>
-                Tracks {tracks && `(${tracks.length})`}
+          <Tabs colorScheme="brand" variant="soft-rounded" bg="white" p={6} borderRadius="2xl" boxShadow="lg">
+            <TabList mb={6}>
+              <Tab 
+                fontWeight="600" 
+                borderRadius="xl"
+                _selected={{ 
+                  color: 'white', 
+                  bg: 'brand.500',
+                  boxShadow: 'md'
+                }}
+              >
+                🎵 Tracks {tracks && `(${tracks.length})`}
               </Tab>
-              <Tab>
-                Albums {albums && `(${albums.length})`}
+              <Tab 
+                fontWeight="600"
+                borderRadius="xl"
+                _selected={{ 
+                  color: 'white', 
+                  bg: 'brand.500',
+                  boxShadow: 'md'
+                }}
+              >
+                💿 Albums {albums && `(${albums.length})`}
               </Tab>
             </TabList>
 
@@ -139,12 +168,20 @@ const HomePage = () => {
         )}
 
         {searchQuery.length === 0 && (
-          <Box bg="white" p={8} borderRadius="lg" textAlign="center">
-            <Heading size="md" mb={4}>
-              Explore by Artist
+          <Box 
+            bg="white" 
+            p={10} 
+            borderRadius="2xl" 
+            textAlign="center"
+            boxShadow="xl"
+            border="2px"
+            borderColor="gray.100"
+          >
+            <Heading size="lg" mb={4} color="gray.800">
+              🎸 Explore by Artist
             </Heading>
-            <Text color="gray.600" mb={6}>
-              Search for your favorite artist to see their albums
+            <Text color="gray.600" mb={8} fontSize="md">
+              Search for your favorite artist to discover their complete discography
             </Text>
             <SearchBar
               value=""
